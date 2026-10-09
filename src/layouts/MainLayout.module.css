@@ -1,0 +1,30 @@
+/* layouts/MainLayout.module.css */
+.layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 70px 1fr 90px;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "player  player";
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    overflow-y: auto;
+}
+
+.main {
+    grid-area: main;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.player {
+    grid-area: player;
+}

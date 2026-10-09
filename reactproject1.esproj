@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/1.0.6537497">
+  <PropertyGroup>
+    <StartupCommand>npm run dev</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Vitest</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <!-- Folder where production build objects will be placed -->
+    <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\components\ArtistCard\" />
+    <Folder Include="src\components\Header\" />
+    <Folder Include="src\pages\Library\" />
+    <Folder Include="src\pages\History\" />
+    <Folder Include="src\components\Sidebar\" />
+    <Folder Include="src\components\TrackListItem\" />
+    <Folder Include="src\components\PlayerBar\" />
+    <Folder Include="src\pages\Liked\" />
+    <Folder Include="src\pages\Login\" />
+    <Folder Include="src\pages\Register\" />
+    <Folder Include="src\pages\Settings\" />
+  </ItemGroup>
+</Project>

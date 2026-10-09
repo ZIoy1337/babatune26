@@ -1,0 +1,58 @@
+.wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: 32px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: white;
+}
+
+    .card input {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        color: white;
+        font-family: var(--font-base);
+    }
+
+    .card button {
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+
+        .card button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+.switch {
+    font-size: 13px;
+    text-align: center;
+    color: var(--color-text-muted);
+}
+
+.error {
+    background: rgba(224, 84, 106, 0.15);
+    border: 1px solid rgba(224, 84, 106, 0.4);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 13px;
+}

@@ -1,0 +1,22 @@
+.section {
+    margin-bottom: 32px;
+}
+
+.sectionTitle {
+    color: white;
+    margin-bottom: 16px;
+    font-size: 20px;
+}
+
+.tracksRow {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+}
+
+.recentGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 500px;
+}

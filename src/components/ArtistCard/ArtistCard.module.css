@@ -1,0 +1,17 @@
+.card {
+    text-align: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+}
+
+.name {
+    font-size: 13px;
+}

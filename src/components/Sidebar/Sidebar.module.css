@@ -1,0 +1,33 @@
+.sidebar {
+    background: rgba(69, 58, 92, 0.35);
+    color: var(--color-text);
+    height: 100%;
+    padding: var(--spacing-lg) var(--spacing-md);
+    backdrop-filter: blur(24px);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+    .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: var(--spacing-lg);
+    }
+
+        .sidebar nav > div {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+    .sidebar a {
+        padding: 8px 12px;
+        border-radius: var(--radius-sm);
+        transition: background 0.15s ease;
+    }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
