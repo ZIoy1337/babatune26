@@ -39,31 +39,60 @@
         font-family: var(--font-base);
     }
 
-.toggleRow {
+.avatarRow {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--spacing-sm);
-    font-size: 14px;
+    gap: 16px;
+    margin-bottom: var(--spacing-md);
 }
 
-    .toggleRow input {
-        width: 18px;
-        height: 18px;
-        accent-color: var(--color-accent);
+    .avatarRow img {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        object-fit: cover;
     }
 
-.saveBtn {
-    background: var(--color-accent);
+.avatarBtns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.card button {
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-sm);
-    padding: 12px 24px;
+    padding: 8px 14px;
     font-family: var(--font-base);
-    font-weight: 600;
     cursor: pointer;
 }
 
-    .saveBtn:hover {
+    .card button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+.card .saveBtn {
+    background: var(--color-accent);
+    border: none;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+    .card .saveBtn:hover:not(:disabled) {
         background: var(--color-accent-hover);
     }
+
+.ok {
+    color: #6fcf97;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.err {
+    color: #ff8a9a;
+    font-size: 13px;
+    margin-top: 8px;
+}

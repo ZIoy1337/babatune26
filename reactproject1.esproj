@@ -11,6 +11,8 @@
   <ItemGroup>
     <Folder Include="src\components\ArtistCard\" />
     <Folder Include="src\components\Header\" />
+    <Folder Include="src\components\AddToPlaylist\" />
+    <Folder Include="src\components\NotificationBell\" />
     <Folder Include="src\pages\Library\" />
     <Folder Include="src\pages\History\" />
     <Folder Include="src\components\Sidebar\" />
@@ -18,6 +20,8 @@
     <Folder Include="src\components\PlayerBar\" />
     <Folder Include="src\pages\Liked\" />
     <Folder Include="src\pages\Login\" />
+    <Folder Include="src\pages\NewPlaylist\" />
+    <Folder Include="src\pages\Playlist\" />
     <Folder Include="src\pages\Register\" />
     <Folder Include="src\pages\Settings\" />
   </ItemGroup>

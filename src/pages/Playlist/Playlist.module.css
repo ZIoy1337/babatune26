@@ -1,0 +1,73 @@
+/* src/pages/Playlist/Playlist.module.css */
+.page {
+    color: white;
+    max-width: 700px;
+}
+
+.head {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+    .head img {
+        width: 120px;
+        height: 120px;
+        border-radius: var(--radius-md);
+        object-fit: cover;
+    }
+
+.muted {
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+    .row img {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-sm);
+        object-fit: cover;
+    }
+
+.info {
+    flex: 1;
+    min-width: 0;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-family: var(--font-base);
+    cursor: pointer;
+    margin-top: 8px;
+}
+
+.row .btn {
+    margin-top: 0;
+}
+
+.error {
+    background: rgba(224, 84, 106, 0.15);
+    border: 1px solid rgba(224, 84, 106, 0.4);
+    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    font-size: 13px;
+    margin-bottom: 16px;
+}

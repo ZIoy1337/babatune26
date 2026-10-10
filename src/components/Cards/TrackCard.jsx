@@ -1,7 +1,7 @@
 import { IoHeart, IoHeartOutline } from "react-icons/io5";
 import styles from "./TrackCard.module.css";
 
-export default function TrackCard({ name, author, image, liked, onToggleLike }) {
+export default function TrackCard({ name, author, image, liked, onToggleLike, menu }) {
     return (
         <div className={styles.card}>
             <div className={styles.imageWrap}>
@@ -17,6 +17,9 @@ export default function TrackCard({ name, author, image, liked, onToggleLike }) 
                     </button>
                 )}
             </div>
+
+            {menu && <div className={styles.menuSlot}>{menu}</div>}
+
             <div className={styles.name}>{name}</div>
             <div className={styles.author}>{author}</div>
         </div>

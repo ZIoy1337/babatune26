@@ -1,38 +1,24 @@
+// src/store/AuthContext.jsx
 import { createContext, useContext, useState, useEffect } from "react";
 import * as authApi from "../api/auth";
+import { getSession, setSession, subscribeSession } from "../api/session";
+import { getMe } from "../api/users";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-    const [user, setUser] = useState(null);
-    const [accessToken, setAccessToken] = useState(null);
-    const [refreshToken, setRefreshToken] = useState(null);
+    const [session, setSessionState] = useState(() => getSession());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const saved = localStorage.getItem("auth");
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            setUser(parsed.user);
-            setAccessToken(parsed.accessToken);
-            setRefreshToken(parsed.refreshToken);
-        }
-    }, []);
-
-    function saveSession(data) {
-        setUser(data.user);
-        setAccessToken(data.accessToken);
-        setRefreshToken(data.refreshToken);
-        localStorage.setItem("auth", JSON.stringify(data));
-    }
+    // сессия может измениться вне React (например, после обновления токена)
+    useEffect(() => subscribeSession(setSessionState), []);
 
     async function handleLogin(credentials) {
         setLoading(true);
         setError(null);
         try {
-            const data = await authApi.login(credentials);
-            saveSession(data);
+            setSession(await authApi.login(credentials));
             return true;
         } catch (err) {
             setError(err.message);
@@ -46,8 +32,7 @@ export function AuthProvider({ children }) {
         setLoading(true);
         setError(null);
         try {
-            const data = await authApi.register(payload);
-            saveSession(data);
+            setSession(await authApi.register(payload));
             return true;
         } catch (err) {
             setError(err.message);
@@ -57,25 +42,40 @@ export function AuthProvider({ children }) {
         }
     }
 
+    async function refreshUser() {
+        const me = await getMe(session?.accessToken);
+        const current = getSession();
+        if (current) setSession({ ...current, user: me });
+    }
+
     async function handleLogout() {
+        const refreshToken = session?.refreshToken;
         if (refreshToken) {
             try { await authApi.logout(refreshToken); } catch { /* ignore */ }
         }
-        setUser(null);
-        setAccessToken(null);
-        setRefreshToken(null);
-        localStorage.removeItem("auth");
+        setSession(null);
     }
 
     return (
         <AuthContext.Provider
-            value={{ user, accessToken, loading, error, login: handleLogin, register: handleRegister, logout: handleLogout }}
+            value={{
+                user: session?.user ?? null,
+                accessToken: session?.accessToken ?? null,
+                loading,
+                error,
+                login: handleLogin,
+                register: handleRegister,
+                logout: handleLogout,
+                refreshUser,
+
+            }}
         >
             {children}
         </AuthContext.Provider>
     );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
     return useContext(AuthContext);
 }

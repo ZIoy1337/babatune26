@@ -1,0 +1,94 @@
+/* src/components/AddToPlaylist/AddToPlaylist.module.css */
+.btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+    .btn:hover {
+        background: rgba(255, 255, 255, 0.3);
+    }
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.box {
+    width: 320px;
+    max-height: 80vh;
+    overflow-y: auto;
+    background: rgba(26, 24, 37, 0.97);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    color: white;
+    font-family: var(--font-base);
+}
+
+    .box h3 {
+        margin-bottom: 12px;
+        font-size: 16px;
+    }
+
+.muted {
+    color: var(--color-text-muted);
+    font-size: 13px;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: 12px 0;
+}
+
+    .list button {
+        width: 100%;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.08);
+        color: white;
+        border: none;
+        border-radius: var(--radius-sm);
+        padding: 10px 12px;
+        font-family: var(--font-base);
+        cursor: pointer;
+    }
+
+        .list button:hover {
+            background: rgba(255, 255, 255, 0.16);
+        }
+
+.close {
+    background: none;
+    color: var(--color-text-muted);
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-base);
+    margin-top: 8px;
+}
+
+.ok {
+    color: #6fcf97;
+    font-size: 13px;
+}
+
+.err {
+    color: #ff8a9a;
+    font-size: 13px;
+}

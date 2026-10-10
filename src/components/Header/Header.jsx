@@ -1,8 +1,13 @@
+// src/components/Header/Header.jsx
 import { Link } from "react-router-dom";
-import { IoNotificationsOutline, IoChatbubbleOutline, IoSettingsOutline, IoPersonOutline, IoSearchOutline } from "react-icons/io5";
+import { IoChatbubbleOutline, IoSettingsOutline, IoPersonOutline, IoSearchOutline } from "react-icons/io5";
+import { useAuth } from "../../store/AuthContext";
 import styles from "./Header.module.css";
+import NotificationBell from "../NotificationBell/NotificationBell";
 
 export default function Header() {
+    const { user } = useAuth();
+
     return (
         <header className={styles.header}>
             <Link to="/" className={styles.logo}>BabaTune</Link>
@@ -13,12 +18,25 @@ export default function Header() {
             </div>
 
             <div className={styles.icons}>
-                <IoNotificationsOutline />
-                <IoChatbubbleOutline />
-                <Link to="/settings" className={styles.profileLink}>
+                <NotificationBell />
+
+                <Link
+                    to={user ? "/rooms" : "/login"}
+                    className={styles.profileLink}
+                    title="Слушать вместе"
+                >
+                    <IoChatbubbleOutline />
+                </Link>
+
+                <Link to="/settings" className={styles.profileLink} title="Настройки">
                     <IoSettingsOutline />
                 </Link>
-                <Link to="/profile" className={styles.profileLink}>
+
+                <Link
+                    to={user ? "/profile" : "/login"}
+                    className={styles.profileLink}
+                    title={user ? "Профиль" : "Войти"}
+                >
                     <IoPersonOutline />
                 </Link>
             </div>
