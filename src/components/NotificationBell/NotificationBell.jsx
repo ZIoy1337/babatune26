@@ -1,5 +1,6 @@
 // src/components/NotificationBell/NotificationBell.jsx
 import { useState, useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useAuth } from "../../store/AuthContext";
@@ -14,6 +15,8 @@ export default function NotificationBell() {
     const { user, accessToken } = useAuth();
     const navigate = useNavigate();
     const boxRef = useRef(null);
+    const dropRef = useRef(null);
+    const [pos, setPos] = useState({ top: 0, right: 0 });
     const [count, setCount] = useState(0);
     const [open, setOpen] = useState(false);
     const [items, setItems] = useState([]);
@@ -39,7 +42,9 @@ export default function NotificationBell() {
     useEffect(() => {
         if (!open) return;
         const onDown = (e) => {
-            if (boxRef.current && !boxRef.current.contains(e.target)) setOpen(false);
+            const inBell = boxRef.current?.contains(e.target);
+            const inDrop = dropRef.current?.contains(e.target);
+            if (!inBell && !inDrop) setOpen(false);
         };
         document.addEventListener("mousedown", onDown);
         return () => document.removeEventListener("mousedown", onDown);
@@ -48,13 +53,17 @@ export default function NotificationBell() {
     if (!user) {
         return (
             <Link to="/login" className={styles.button} title="Войти">
-                <NotificationBell />
+                <IoNotificationsOutline />
             </Link>
         );
     }
 
     function toggle() {
         const next = !open;
+        if (next && boxRef.current) {
+            const r = boxRef.current.getBoundingClientRect();
+            setPos({ top: r.bottom + 8, right: window.innerWidth - r.right });
+        }
         setOpen(next);
         if (next) {
             setError(null);
@@ -84,8 +93,12 @@ export default function NotificationBell() {
                 {count > 0 && <span className={styles.badge}>{count > 99 ? "99+" : count}</span>}
             </button>
 
-            {open && (
-                <div className={styles.dropdown}>
+            {open && createPortal(
+                <div
+                    ref={dropRef}
+                    className={styles.dropdown}
+                    style={{ position: "fixed", top: pos.top, right: pos.right, zIndex: 10000 }}
+                >
                     <div className={styles.head}>Уведомления</div>
                     {error && <div className={styles.empty}>{error}</div>}
                     {!error && items.length === 0 && <div className={styles.empty}>Пока ничего нет</div>}
@@ -111,7 +124,8 @@ export default function NotificationBell() {
                             </div>
                         </div>
                     ))}
-                </div>
+                </div>,
+                document.body
             )}
         </div>
     );

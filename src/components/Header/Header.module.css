@@ -7,6 +7,9 @@
     gap: var(--spacing-lg);
     height: 100%;
     padding: 0 var(--spacing-lg);
+    grid-area: header;
+    position: relative;
+    z-index: 999;
 }
 
 .logo {

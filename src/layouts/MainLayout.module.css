@@ -12,6 +12,8 @@
 
 .header {
     grid-area: header;
+    position: relative;
+    z-index: 100;
 }
 
 .sidebar {
@@ -23,6 +25,8 @@
     grid-area: main;
     overflow-y: auto;
     padding: 24px;
+    position: relative;
+    z-index: 0;
 }
 
 .player {

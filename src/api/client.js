@@ -1,13 +1,18 @@
 // src/api/client.js
 import { getSession, setSession } from "./session";
 import { parseUtc } from "../utils/time";
+import { mockFetch } from "./mock";
+
+// true = демо-режим с фейковыми данными, без бэкенда.
+// Перед подключением к настоящему бэкенду поставь false.
+export const USE_MOCK = true;
 
 export const API_BASE_URL = "https://localhost:7153/api";
 export const ASSET_BASE_URL = "https://localhost:7153";
 
 export function assetUrl(path, fallback = "https://placehold.co/140x140") {
     if (!path) return fallback;
-    return path.startsWith("http") ? path : `${ASSET_BASE_URL}${path}`;
+    return /^(https?:|blob:|data:)/.test(path) ? path : `${ASSET_BASE_URL}${path}`;
 }
 
 const TIMEOUT_MS = 15000;
@@ -73,6 +78,8 @@ function isExpiringSoon(session) {
 // Параметр token работает как флаг «запрос от залогиненного».
 // Реальный токен берётся из сессии, поэтому он всегда свежий.
 export default async function apiFetch(endpoint, options = {}, token = null) {
+    if (USE_MOCK) return mockFetch(endpoint, options);
+
     const authed = Boolean(token);
 
     if (authed && isExpiringSoon(getSession())) {
